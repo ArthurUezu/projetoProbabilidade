@@ -22,45 +22,41 @@ mes_dicionario = {'janeiro':1,'fevereiro':2,'março':3,'abril':4,'maio':5,'junho
 #loop principal do webscraper
 for palavra in palavras_chave:
     data = [4,10,2021]
-    j=1 #pagina inicial
+    j=13
     flag = True
 
-    print('Palavra chave atual: ' + palavra)
+    print('palavra chave atual: ' + palavra)
 
     while flag:
         response_menu = requests.get(url_base+str(j)+url_final+palavra) #site + palavra chave
-        print("Pagina:",j,"\n")
+        print("Pagina:",j)
         site_menu = BeautifulSoup(response_menu.text,'html.parser')
-        container = site_menu.find('div', attrs={'class': 'td_block_inner tdb-block-inner td-fix-index'})
-        #print(container.text)
-
-        #LEMBRA DE MUDAR PRA CONTAINER
-        noticias = container.find_all('div',attrs={'class':'td-module-meta-info'}) #recolhe cada box de noticia
+        noticias = site_menu.find_all('div',attrs={'class':'td-module-meta-info'}) #recolhe cada box de noticia
 
         #pega o numero de paginas total
         pag_total = site_menu.find('span', attrs={'class': 'pages'})
         pag_total_text = pag_total.text
-        pag_total_text = pag_total_text.split(" de ") #lista [pagina atual, pagina final]    
-        
-        #seleção das informações relevantes
-        for noticia in noticias:          
-            
-            data = noticia.find('time')
-            data = tratamentoData(data.text)
-            
-            if(int(data[2]) <= 2019):
-                flag = False
-                break
+        pag_total_text = pag_total_text.split(" de ") #lista [pagina atual, pagina final]
 
+
+        #acaba o loop da palavra atual (quando acabar as paginas)
+        if j == int(pag_total_text[1]):
+            flag = False
+            break
+
+        #seleção das informações relevantes
+        for i in range(0, 12):
+            print("Post:",i)
             try:
-                titulo = noticia.find('a',attrs={'rel':'bookmark'})
-                print("Post: " + titulo.text)
-                
+                titulo = noticias[i].find('a',attrs={'rel':'bookmark'})
             except(IndexError):
                 data[2]=0
                 break
-            
-            categoria = noticia.find('a',attrs={'class':'td-post-category'})
+            data = noticias[i].find('time')
+            data = tratamentoData(data.text)
+            if(data=="2019"):
+                flag = False
+            categoria = noticias[i].find('a',attrs={'class':'td-post-category'})
             try:
                 if(categoria.text=="Conspirações" or categoria.text=="Falso"):
                     categoria = "Falso"
@@ -75,11 +71,6 @@ for palavra in palavras_chave:
             noticia_texto = site_post.find("div", attrs={"class": "td_block_wrap tdb_single_content tdi_98 td-pb-border-top td_block_template_1 td-post-content tagdiv-type"})
             dados.append([link,titulo.text,categoria,data[0]+'/'+str(data[1])+'/'+data[2],noticia_texto.text]) #armazenamento dos dados na lista
         j = j + 1
-
-        #acaba o loop da palavra atual (quando acabar as paginas)
-        if j == int(pag_total_text[1]) + 1:
-            flag = False
-            break
 
 #remoção de dados duplicados
 dados = pd.DataFrame(dados,columns=['link','titulo','categoria','data','texto']).drop_duplicates()
