@@ -30,8 +30,7 @@ dados = []
 #loop principal do webscraper
 for palavra in palavras_chave:
     pagina_atual=1
-    paginas_total=2
-
+    paginas_total=2 #2 é apenas para inicializar a variável, o valor dela é alterado no próximo loop
     print('Palavra chave atual: ' + palavra)
 
     while pagina_atual != int(paginas_total) + 1:

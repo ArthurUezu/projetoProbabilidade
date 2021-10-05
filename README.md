@@ -1,27 +1,30 @@
 # projetoProbabilidade  
 
-## Palavras chaves de pesquisa:  
+### Palavras chaves de pesquisa:  
 - corona  
 - coronavirus  
 - covid  
 - sars-cov-2  
 
-## Sites usados:  
+### Sites usados:  
 - https://www.e-farsas.com/  
 - https://g1.globo.com/fato-ou-fake/  
 - https://piaui.folha.uol.com.br/lupa/  
 
-## Visualização de dados:  
+### Visualização de dados:  
 - Mapa de palavras  
 - Frequencia de fake news de cada site  
 - Diferença entre noticias verdadeiras e falsas?  
 
-## Dados a serem pegos:
-- data
-- texto  
+### Dados a serem pegos:  
+Atenção! Salvem os dados nesta ordem:  
+- link  
 - titulo  
+- categoria
+- data  
+- texto  
 
-## Ferramentas:  
+### Ferramentas:  
 - requests  
 - pandas  
 - matplot ou scilab  
