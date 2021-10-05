@@ -29,4 +29,11 @@ Atenção! Salvem os dados nesta ordem:
 - pandas  
 - matplot ou scilab  
 - beautiful soup  
-- selenium talvez?
+- selenium talvez?  
+
+### TODO LIST:  
+- scraping fato ou fake  
+- scraping lupa  
+- filtragem e tratamento de dados  
+- visualização de dados  
+- talvez fazer um arquivo em bash que roda tudo?
