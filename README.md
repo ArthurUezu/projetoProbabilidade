@@ -31,6 +31,12 @@ Atenção! Salvem os dados nesta ordem:
 - beautiful soup  
 - selenium talvez?  
 
+### Features para o usuario:
+- escolher palavras chave
+- procurar uma noticia especifica
+- escolher diferentes tipos de graficos
+- limitar o site a pesquisar
+
 ### TODO LIST:  
 - scraping fato ou fake  
 - scraping lupa  
