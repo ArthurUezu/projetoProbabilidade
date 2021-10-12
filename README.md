@@ -20,7 +20,7 @@
 Atenção! Salvem os dados nesta ordem:  
 - link  
 - titulo  
-- categoria
+- categoria  
 - data  
 - texto  
 
@@ -29,11 +29,9 @@ Atenção! Salvem os dados nesta ordem:
 - pandas  
 - matplot ou scilab  
 - beautiful soup  
-- selenium talvez?  
 
 ### TODO LIST:  
-- scraping fato ou fake  
-- scraping lupa  
+- scraping lupa  ?
 - filtragem e tratamento de dados  
 - visualização de dados  
 - talvez fazer um arquivo em bash que roda tudo?
