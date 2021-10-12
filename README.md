@@ -30,6 +30,12 @@ Atenção! Salvem os dados nesta ordem:
 - matplot ou scilab  
 - beautiful soup  
 
+### Features para o usuario:
+- escolher palavras chave
+- procurar uma noticia especifica
+- escolher diferentes tipos de graficos
+- limitar o site a pesquisar
+
 ### TODO LIST:  
 - scraping lupa  ?
 - filtragem e tratamento de dados  
