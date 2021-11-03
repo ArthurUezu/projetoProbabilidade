@@ -29,6 +29,7 @@ Atenção! Salvem os dados nesta ordem:
 - pandas  
 - matplot ou scilab  
 - beautiful soup  
+- NLTK  
 
 ### Features para o usuario:
 - escolher palavras chave

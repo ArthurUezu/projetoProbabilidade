@@ -18,6 +18,13 @@ def filtragemCategoria(categoria):
         categoria = "Erro"
     return categoria
 
+def filtragemNoticia(noticia):
+    texto = noticia.find_all('span')
+    noticia = ""
+    for paragrafo in texto:
+        noticia = noticia +"\n"+ paragrafo.text
+    return noticia
+
 mes_dicionario = {'janeiro':1,'fevereiro':2,'março':3,'abril':4,'maio':5,'junho':6,'julho':7,'agosto':8,'setembro':9,'outubro':10,'novembro':11,'dezembro':12}
 palavras_chave = ("corona", "coronavirus", "sars-cov-2", "covid") 
 
@@ -61,9 +68,10 @@ for palavra in palavras_chave:
             link_noticia = titulo['href']
             response_noticia = requests.get(link_noticia)
             site_noticia = BeautifulSoup(response_noticia.text,'html.parser')
-            noticia_texto = site_noticia.find("div", attrs={"class": "td_block_wrap tdb_single_content tdi_98 td-pb-border-top td_block_template_1 td-post-content tagdiv-type"})
+            noticia_texto = site_noticia.find("div", attrs={"class": "td_block_wrap tdb_single_content tdi_99 td-pb-border-top td_block_template_1 td-post-content tagdiv-type"})
+            noticia_texto = filtragemNoticia(noticia_texto)
             
-            dados.append([link_noticia,titulo.text,categoria,data[0]+'/'+str(data[1])+'/'+data[2],noticia_texto.text]) #armazenamento dos dados na lista
+            dados.append([link_noticia,titulo.text,categoria,data[0]+'/'+str(data[1])+'/'+data[2],noticia_texto]) #armazenamento dos dados na lista
         pagina_atual = pagina_atual + 1
         print('\n')
 
