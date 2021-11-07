@@ -94,7 +94,7 @@ def main():
     #remoção de dados duplicados
     dados = pd.DataFrame(dados,columns=['link','titulo','categoria','data','texto']).drop_duplicates()
     print(dados)
-
+    dados['data']=pd.to_datetime(dados['data'])
     #armazenamento dos dados em csv
     dados.to_csv("fato_fake.csv",index=False)
 main()
