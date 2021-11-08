@@ -3,9 +3,9 @@
 ### Modo de utilizar:  
 -  Necessita de Python3 e Pip (https://pip.pypa.io/en/stable/installation/)
 -  Instale os requisitos
-  ´´´
+  ```
   pip install -r requirements.txt
-  ´´´
+  ```
 - Abra UI_PRONTA.py
 
 ### Sites usados:  
