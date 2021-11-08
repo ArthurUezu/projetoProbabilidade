@@ -27,8 +27,9 @@ def filtragemNoticia(noticia):
     return noticia
 mes_dicionario = {'janeiro':1,'fevereiro':2,'março':3,'abril':4,'maio':5,'junho':6,'julho':7,'agosto':8,'setembro':9,'outubro':10,'novembro':11,'dezembro':12}
 
-def main():
-    palavras_chave = sys.argv[1:]
+def startEFarsas(tags):
+    palavras_chave = tags
+    print(palavras_chave)
     url_base = "https://www.e-farsas.com/page/"
     url_final = "?s="
 
@@ -36,47 +37,43 @@ def main():
     dados = []
 
     #loop principal do webscraper
-    for palavra in palavras_chave:
-        pagina_atual=1
-        paginas_total=2 #2 é apenas para inicializar a variável, o valor dela é alterado no próximo loop
-        print('Palavra chave atual: ' + palavra)
-
-        while pagina_atual != int(paginas_total) + 1:
-            response_menu = requests.get(url_base+str(pagina_atual)+url_final+palavra) #site + palavra chave
-            site_menu = BeautifulSoup(response_menu.text,'html.parser')
-            container = site_menu.find('div', attrs={'class': 'td_block_inner tdb-block-inner td-fix-index'})
-            noticias = container.find_all('div',attrs={'class':'td-module-meta-info'}) #recolhe cada box de noticia
-
-            print("Pagina:",pagina_atual)
-            #pega o numero de paginas total
-            paginas_total = site_menu.find('span', attrs={'class': 'pages'})
-            try:
-                paginas_total = paginas_total.text.split(" de ")[1] #lista [pagina atual, pagina final
-            except:
-                paginas_total = 1
-            #seleção das informações relevantes
-            for noticia in noticias:
-                data = noticia.find('time')
-                data = tratamentoData(data.text)
-                if int(data[2]) <= 2019:
-                    pagina_atual = int(paginas_total)
-                    break
-
-                titulo = noticia.find('a',attrs={'rel':'bookmark'})
-                print("Post: " + titulo.text)
-
-                categoria = noticia.find('a',attrs={'class':'td-post-category'})
-                categoria = filtragemCategoria(categoria)
-
-                link_noticia = titulo['href']
-                response_noticia = requests.get(link_noticia)
-                site_noticia = BeautifulSoup(response_noticia.text,'html.parser')
-                noticia_texto = site_noticia.find("div", attrs={"class": "td_block_wrap tdb_single_content tdi_99 td-pb-border-top td_block_template_1 td-post-content tagdiv-type"})
-                noticia_texto = filtragemNoticia(noticia_texto)
-
-                dados.append([link_noticia,titulo.text,categoria,data[0]+'/'+str(data[1])+'/'+data[2],noticia_texto]) #armazenamento dos dados na lista
-            pagina_atual = pagina_atual + 1
-            print('\n')
+    # for palavra in palavras_chave:
+    #     pagina_atual=1
+    #     paginas_total=2 #2 é apenas para inicializar a variável, o valor dela é alterado no próximo loop
+    #     print('Palavra chave atual: ' + palavra)
+    pagina_atual=1
+    paginas_total=2
+    while pagina_atual != int(paginas_total) + 1:
+        response_menu = requests.get(url_base+str(pagina_atual)+url_final+palavras_chave) #site + palavra chave
+        site_menu = BeautifulSoup(response_menu.text,'html.parser')
+        container = site_menu.find('div', attrs={'class': 'td_block_inner tdb-block-inner td-fix-index'})
+        noticias = container.find_all('div',attrs={'class':'td-module-meta-info'}) #recolhe cada box de noticia
+        print("Pagina:",pagina_atual)
+        #pega o numero de paginas total
+        paginas_total = site_menu.find('span', attrs={'class': 'pages'})
+        try:
+            paginas_total = paginas_total.text.split(" de ")[1] #lista [pagina atual, pagina final
+        except:
+            paginas_total = 1
+        #seleção das informações relevantes
+        for noticia in noticias:
+            data = noticia.find('time')
+            data = tratamentoData(data.text)
+            if int(data[2]) <= 2019:
+                pagina_atual = int(paginas_total)
+                break
+            titulo = noticia.find('a',attrs={'rel':'bookmark'})
+            print("Post: " + titulo.text)
+            categoria = noticia.find('a',attrs={'class':'td-post-category'})
+            categoria = filtragemCategoria(categoria)
+            link_noticia = titulo['href']
+            response_noticia = requests.get(link_noticia)
+            site_noticia = BeautifulSoup(response_noticia.text,'html.parser')
+            noticia_texto = site_noticia.find("div", attrs={"class": "td_block_wrap tdb_single_content tdi_99 td-pb-border-top td_block_template_1 td-post-content tagdiv-type"})
+            noticia_texto = filtragemNoticia(noticia_texto)
+            dados.append([link_noticia,titulo.text,categoria,data[0]+'/'+str(data[1])+'/'+data[2],noticia_texto]) #armazenamento dos dados na lista
+        pagina_atual = pagina_atual + 1
+        print('\n')
 
     #remoção de dados duplicados
     dados = pd.DataFrame(dados,columns=['link','titulo','categoria','data','texto']).drop_duplicates()
@@ -84,4 +81,62 @@ def main():
     dados['data']=pd.to_datetime(dados['data'])
     #armazenamento dos dados em csv
     dados.to_csv("efarsas.csv",index=False)
-main()
+
+# def main():
+#     palavras_chave = sys.argv[1:]
+#     print(palavras_chave)
+#     url_base = "https://www.e-farsas.com/page/"
+#     url_final = "?s="
+
+#     #lista para armazenar os dados recolhidos do site
+#     dados = []
+
+#     #loop principal do webscraper
+#     for palavra in palavras_chave:
+#         pagina_atual=1
+#         paginas_total=2 #2 é apenas para inicializar a variável, o valor dela é alterado no próximo loop
+#         print('Palavra chave atual: ' + palavra)
+
+#         while pagina_atual != int(paginas_total) + 1:
+#             response_menu = requests.get(url_base+str(pagina_atual)+url_final+palavra) #site + palavra chave
+#             site_menu = BeautifulSoup(response_menu.text,'html.parser')
+#             container = site_menu.find('div', attrs={'class': 'td_block_inner tdb-block-inner td-fix-index'})
+#             noticias = container.find_all('div',attrs={'class':'td-module-meta-info'}) #recolhe cada box de noticia
+
+#             print("Pagina:",pagina_atual)
+#             #pega o numero de paginas total
+#             paginas_total = site_menu.find('span', attrs={'class': 'pages'})
+#             try:
+#                 paginas_total = paginas_total.text.split(" de ")[1] #lista [pagina atual, pagina final
+#             except:
+#                 paginas_total = 1
+#             #seleção das informações relevantes
+#             for noticia in noticias:
+#                 data = noticia.find('time')
+#                 data = tratamentoData(data.text)
+#                 if int(data[2]) <= 2019:
+#                     pagina_atual = int(paginas_total)
+#                     break
+
+#                 titulo = noticia.find('a',attrs={'rel':'bookmark'})
+#                 print("Post: " + titulo.text)
+
+#                 categoria = noticia.find('a',attrs={'class':'td-post-category'})
+#                 categoria = filtragemCategoria(categoria)
+
+#                 link_noticia = titulo['href']
+#                 response_noticia = requests.get(link_noticia)
+#                 site_noticia = BeautifulSoup(response_noticia.text,'html.parser')
+#                 noticia_texto = site_noticia.find("div", attrs={"class": "td_block_wrap tdb_single_content tdi_99 td-pb-border-top td_block_template_1 td-post-content tagdiv-type"})
+#                 noticia_texto = filtragemNoticia(noticia_texto)
+
+#                 dados.append([link_noticia,titulo.text,categoria,data[0]+'/'+str(data[1])+'/'+data[2],noticia_texto]) #armazenamento dos dados na lista
+#             pagina_atual = pagina_atual + 1
+#             print('\n')
+
+#     #remoção de dados duplicados
+#     dados = pd.DataFrame(dados,columns=['link','titulo','categoria','data','texto']).drop_duplicates()
+#     print(dados)
+#     dados['data']=pd.to_datetime(dados['data'])
+#     #armazenamento dos dados em csv
+#     dados.to_csv("efarsas.csv",index=False)
