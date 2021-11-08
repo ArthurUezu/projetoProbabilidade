@@ -1,10 +1,9 @@
 # projetoProbabilidade  
 
-### Palavras chaves de pesquisa:  
-- corona  
-- coronavirus  
-- covid  
-- sars-cov-2  
+### Modo de utilizar:  
+- py efarsas.py n palavras chaves  
+- py fato_fake.py n palavras chaves  
+- py filtragem data_inicial data_final  
 
 ### Sites usados:  
 - https://www.e-farsas.com/  
@@ -38,7 +37,7 @@ Atenção! Salvem os dados nesta ordem:
 - limitar o site a pesquisar
 
 ### TODO LIST:  
-- scraping lupa  ?
-- filtragem e tratamento de dados  
-- visualização de dados  
-- talvez fazer um arquivo em bash que roda tudo?
+- [ ] scraping lupa  ?
+- [x] filtragem e tratamento de dados  
+- [ ] visualização de dados  
+- [ ] talvez fazer um arquivo em bash que roda tudo?
