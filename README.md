@@ -6,7 +6,7 @@
   ```
   pip install -r requirements.txt
   ```
-- Abra UI_PRONTA.py
+- Abra Compilador_Fake_News.py
 
 ### Sites usados:  
 - https://www.e-farsas.com/  
