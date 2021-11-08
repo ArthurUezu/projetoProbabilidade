@@ -1,14 +1,16 @@
 # projetoProbabilidade  
 
 ### Modo de utilizar:  
-- py efarsas.py n palavras chaves  
-- py fato_fake.py n palavras chaves  
-- py filtragem data_inicial data_final  
+-  Necessita de Python3 e Pip (https://pip.pypa.io/en/stable/installation/)
+-  Instale os requisitos
+  ´´´
+  pip install -r requirements.txt
+  ´´´
+- Abra UI_PRONTA.py
 
 ### Sites usados:  
 - https://www.e-farsas.com/  
-- https://g1.globo.com/fato-ou-fake/  
-- https://piaui.folha.uol.com.br/lupa/  
+- https://g1.globo.com/fato-ou-fake/    
 
 ### Visualização de dados:  
 - Mapa de palavras  
