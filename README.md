@@ -7,6 +7,17 @@
   pip install -r requirements.txt
   ```
 - Abra Compilador_Fake_News.py
+- Para linux instale os requisitos acima e instale essas bibliotecas 
+- Para ubuntu
+```
+sudo apt update && sudo apt  install libxcb-image0 libxcb-keysyms1 libxcb-render-util0 libxcb-xkb1 libxkbcommon-x11-0 libxcb-icccm4
+```
+- Para Arch
+```
+sudo pacman -Sy && sudo pacman -S libxcb-image0 libxcb-keysyms1 libxcb-render-util0 libxcb-xkb1 libxkbcommon-x11-0 libxcb-icccm4
+```
+- Ou instale com seu gerenciador de pacotes preferido.
+
 
 ### Sites usados:  
 - https://www.e-farsas.com/  
