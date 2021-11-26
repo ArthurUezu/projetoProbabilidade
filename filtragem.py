@@ -9,6 +9,7 @@ from nltk.tokenize import word_tokenize
 import matplotlib.pyplot as plt
 import numpy as np
 # nltk.download('punkt')
+
 dado_FatoFake = pd.DataFrame(columns=['link','titulo','categoria','data','texto'])
 dado_Efarsas = pd.DataFrame(columns=['link','titulo','categoria','data','texto'])
 
