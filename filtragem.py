@@ -6,7 +6,7 @@ import datetime
 from datetime import date
 from pandas.core.algorithms import duplicated
 from nltk.tokenize import word_tokenize
-# nltk.download('punkt')
+nltk.download('punkt')
 dado_FatoFake = pd.DataFrame(columns=['link','titulo','categoria','data','texto'])
 dado_Efarsas = pd.DataFrame(columns=['link','titulo','categoria','data','texto'])
 
