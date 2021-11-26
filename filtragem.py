@@ -84,7 +84,7 @@ def startFiltragem(efarsas,data1,data2):
     if (efarsas):
         dado_Efarsas = pd.read_csv("efarsas.csv")
         dado_Efarsas = definir_periodo(dado_Efarsas,data1,data2)
-        gera_grafico(dado_Efarsas,'verdade')
+        gera_grafico(dado_Efarsas,'vacinas')
         textos_filtrados_total = filtragemTexto(dado_Efarsas,"efarsas_filtrado.csv")
         contagemPalavras(textos_filtrados_total,"efarsas_repeticoes.csv")
     else:

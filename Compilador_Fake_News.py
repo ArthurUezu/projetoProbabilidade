@@ -128,7 +128,7 @@ class Ui_Widget(object):
                 msg.setIcon(QMessageBox.Warning)
                 msg.exec_()
                 efarsas.startEFarsas(Texto)
-                filtragem.startFiltragem(True,self.data1.date().toPyDate().strftime("%Y-%m-%d"),self.data2.date().toPyDate().strftime("%Y-%m-%d"))
+                filtragem.startFiltragem(True,self.data1.date().toPyDate().strftime("%Y-%m-%d"),self.data2.date().toPyDate().strftime("%Y-%m-%d"),Texto)
                 global_flag = True
                 self.w = AnotherWindow()
                 self.w.show()
