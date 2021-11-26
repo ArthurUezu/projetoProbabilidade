@@ -108,13 +108,13 @@ class Ui_Widget(object):
         else:
             self.Tag.setText("")
             if (self.buttonGroup.checkedId()== 1 and Texto == "DEBUG"):
-                filtragem.startFiltragem(True,self.data1.date().toPyDate().strftime("%Y-%m-%d"),self.data2.date().toPyDate().strftime("%Y-%m-%d"))
+                filtragem.startFiltragem(True,self.data1.date().toPyDate().strftime("%Y-%m-%d"),self.data2.date().toPyDate().strftime("%Y-%m-%d"),Texto)
                 global_flag = True
                 self.w = AnotherWindow()
                 self.w.show()
 
             elif(self.buttonGroup.checkedId()==2 and Texto == "DEBUG"):
-                filtragem.startFiltragem(False,self.data1.date().toPyDate().strftime("%Y-%m-%d"),self.data2.date().toPyDate().strftime("%Y-%m-%d"))
+                filtragem.startFiltragem(False,self.data1.date().toPyDate().strftime("%Y-%m-%d"),self.data2.date().toPyDate().strftime("%Y-%m-%d"),Texto)
                 global_flag = False
                 self.w = AnotherWindow()
                 self.w.show()
@@ -142,7 +142,7 @@ class Ui_Widget(object):
                 msg.setIcon(QMessageBox.Warning)
                 msg.exec_()
                 fato_fake.startFato_fake(Texto)
-                filtragem.startFiltragem(False,self.data1.date().toPyDate().strftime("%Y-%m-%d"),self.data2.date().toPyDate().strftime("%Y-%m-%d"))
+                filtragem.startFiltragem(False,self.data1.date().toPyDate().strftime("%Y-%m-%d"),self.data2.date().toPyDate().strftime("%Y-%m-%d"),Texto)
                 global_flag = False
                 self.w = AnotherWindow()
                 self.w.show()
