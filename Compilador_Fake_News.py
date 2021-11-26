@@ -1,9 +1,14 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QTableWidgetItem, QTableWidget, QWidget,QMessageBox
+import pandas as pd
 import efarsas
 import filtragem
 import fato_fake
+import threading
 from datetime import datetime
+import time
 
+global_flag = False
 
 class Ui_Widget(object):
     def setupUi(self, Widget):
@@ -105,15 +110,30 @@ class Ui_Widget(object):
             if (self.buttonGroup.checkedId() == 1):
                 self.Edtexto.append("Selecionado E-Farsas\n")
                 self.Edtexto.append("Tag: "+Texto)
+                msg = QMessageBox()
+                msg.setWindowTitle("Atenção")
+                msg.setText("O programa pode travar, NÃO FECHE!")
+                msg.setIcon(QMessageBox.Warning)
+                msg.exec_()
                 efarsas.startEFarsas(Texto)
                 filtragem.startFiltragem(True,self.data1.date().toPyDate().strftime("%Y-%m-%d"),self.data2.date().toPyDate().strftime("%Y-%m-%d"))
+                global_flag = True
+                self.w = AnotherWindow()
+                self.w.show()
 
             elif (self.buttonGroup.checkedId() == 2):
                 self.Edtexto.append("Selecionado G1\n")
                 self.Edtexto.append("Tag: "+Texto)
+                msg = QMessageBox()
+                msg.setWindowTitle("Atenção")
+                msg.setText("O programa pode travar, NÃO FECHE!")
+                msg.setIcon(QMessageBox.Warning)
+                msg.exec_()
                 fato_fake.startFato_fake(Texto)
                 filtragem.startFiltragem(False,self.data1.date().toPyDate().strftime("%Y-%m-%d"),self.data2.date().toPyDate().strftime("%Y-%m-%d"))
-
+                global_flag = False
+                self.w = AnotherWindow()
+                self.w.show()
 
 
     def retranslateUi(self, Widget):
@@ -125,6 +145,37 @@ class Ui_Widget(object):
         self.de.setText(_translate("Widget", "De"))
         self.ate.setText(_translate("Widget", "Ate"))
         self.Bpesquisa.setText(_translate("Widget", "Pesquisa"))
+
+class AnotherWindow(QWidget):
+    def __init__(self):
+        super().__init__()
+        layout = QtWidgets.QVBoxLayout()
+        self.tableWidget = QtWidgets.QTableWidget()
+        layout.addWidget(self.tableWidget)
+        if (global_flag):
+            file_name = "efarsas_filtrado.csv"
+        else:
+            file_name = "fato_fake_filtrado.csv"
+
+        self.setLayout(layout)
+        self.LoadCSVData(file_name)
+
+
+    def LoadCSVData(self,fileName):
+        df = pd.read_csv(fileName)
+        if df.empty:
+            return
+        df.fillna('', inplace=True)
+        self.tableWidget.setRowCount(df.shape[0])
+        self.tableWidget.setColumnCount(df.shape[1])
+        self.tableWidget.setHorizontalHeaderLabels(df.columns)
+
+        for row in df.iterrows():
+            values = row[1]
+            for col_index,value in enumerate(values):
+                value = str(value)
+                item = QtWidgets.QTableWidgetItem(value)
+                self.tableWidget.setItem(row[0],col_index,item)
 
 
 if __name__ == "__main__":
