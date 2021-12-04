@@ -60,6 +60,9 @@ def gera_grafico(dataframe,palavra):
     x = []
     i = 0
 
+    #estilo do grafico
+    plt.style.use('fivethirtyeight')
+
     for week in weeks:
         texto_filtrados_total = filtragemTexto(week,None)
         df = contagemPalavras(texto_filtrados_total,None)
@@ -72,7 +75,16 @@ def gera_grafico(dataframe,palavra):
         x.append(i)
 
         i = i+1
-    plt.bar(x, y)
+
+    plt.bar(x, y, width=0.5, color='#a83238', label= palavra)
+    plt.ylabel('frequencia')
+    plt.xlabel('semanas')
+
+    plt.title('ultima palavra chave: ' + palavra)
+    plt.legend()
+    plt.tight_layout()
+    plt.show()
+
     plt.savefig('graficosemana.png')
     return print('top one from brazil')
 
