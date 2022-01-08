@@ -100,6 +100,7 @@ class Ui_Widget(object):
         self.Bpesquisa.clicked.connect(self.cleanAndSet)
 
     def cleanAndSet(self):
+
         Texto=self.Tag.text()
         if Texto=="":
             self.Edtexto.setText("Nenhuma Tag Selecionada!")
