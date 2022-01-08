@@ -54,3 +54,6 @@ Atenção! Salvem os dados nesta ordem:
 - [x] filtragem e tratamento de dados  
 - [ ] visualização de dados  
 - [ ] talvez fazer um arquivo em bash que roda tudo?
+- [ ] implementar um novo sistema de indice que mostra meses/anos
+- [ ] fzer o describe funcionar ou fazer uma funcao na mao que mostre todas os atributos pedidos pela professora
+- [ ] implementar relatorio de analise de dados

@@ -8,10 +8,13 @@ from pandas.core.algorithms import duplicated
 from nltk.tokenize import word_tokenize
 import matplotlib.pyplot as plt
 import numpy as np
+import random
 # nltk.download('punkt')
 
 dado_FatoFake = pd.DataFrame(columns=['link','titulo','categoria','data','texto'])
 dado_Efarsas = pd.DataFrame(columns=['link','titulo','categoria','data','texto'])
+
+#count = 0
 
 def filtragemTexto(dataframe,destino):
     textos_filtrados = []
@@ -63,10 +66,16 @@ def gera_grafico(dataframe,palavra):
     #estilo do grafico
     plt.style.use('fivethirtyeight')
 
+    #var para setar primeira e ultima data
+    first_date = weeks[0]
+    last_date = weeks[len(weeks)-1]
+
     for week in weeks:
+
         texto_filtrados_total = filtragemTexto(week,None)
         df = contagemPalavras(texto_filtrados_total,None)
         frequencia = df.loc[df.palavras == palavra,'repeticoes']
+
         # print(frequencia['repeticoes'])
         if (not frequencia.empty):
             y.append(frequencia.iloc[0])
@@ -76,20 +85,30 @@ def gera_grafico(dataframe,palavra):
 
         i = i+1
 
-    plt.bar(x, y, width=0.5, color='#a83238', label= palavra)
+    #SISTEMA PARA CORES ALEATORIAS
+    colors =["#ff0400","#0400ff","#00ff04","#ff0400","#ff8400","#ff007b","#00fbff","#fbff00","#ff00d0","#03ffc8","#26deff","#a04cff","#ff8a67","#86ff9c","#ff86e9","#ff9c86","#86e9ff","#86ff9c","#31c5ff","#fffc40"]
+    rand_color = colors[random.randint(0, 20)]
+
+    plt.bar(x, y, width=0.5, color=rand_color, label= palavra)
     plt.ylabel('frequencia')
     plt.xlabel('semanas')
 
-    plt.title('ultima palavra chave: ' + palavra)
+    print(weeks)
+
+    plt.title('ultima palavra chave: ' + palavra + ' (' + str(first_date.iloc[0]['data'].date()) + ' - ' + str(last_date.iloc[len(last_date)-1]['data'].date()) + ')')
     plt.legend()
     plt.tight_layout()
     plt.show()
-
+    
     plt.savefig('graficosemana.png')
+
     return print('top one from brazil')
 
 words = ['Com','97305-9827','são','texto','+55','mostra','Circula','E','gente','Ela','Ele','informações','Foto','Vídeo','uso','G1','Em',"#","%",'mensagem',"''",'Estava','Na','Conclusão','informou','mostrando','ocorridos','frequentemente','vídeo','foto','site','Sim','Não','Será','Em','``',';','//www.youtube.com/watch','Só','—','!',':','As',',','O','Os','A','“','”',"'",'(',')','.','?','Um','por','No','"','É','De','No','https','Atualização','-','–','Publicidade','a', 'à', 'adeus', 'agora', 'aí', 'ainda', 'além', 'algo', 'alguém', 'algum', 'alguma', 'algumas', 'alguns', 'ali', 'ampla', 'amplas', 'amplo', 'amplos', 'ano', 'anos', 'ante', 'antes', 'ao', 'aos', 'apenas', 'apoio', 'após', 'aquela', 'aquelas', 'aquele', 'aqueles', 'aqui', 'aquilo', 'área', 'as', 'às', 'assim', 'até', 'atrás', 'através', 'baixo', 'bastante', 'bem', 'boa', 'boas', 'bom', 'bons', 'breve', 'cá', 'cada', 'catorze', 'cedo', 'cento', 'certamente', 'certeza', 'cima', 'cinco', 'coisa', 'coisas', 'com', 'como', 'conselho', 'contra', 'contudo', 'custa', 'da', 'dá', 'dão', 'daquela', 'daquelas', 'daquele', 'daqueles', 'dar', 'das', 'de', 'debaixo', 'dela', 'delas', 'dele', 'deles', 'demais', 'dentro', 'depois', 'desde', 'dessa', 'dessas', 'desse', 'desses', 'desta', 'destas', 'deste', 'destes', 'deve', 'devem', 'devendo', 'dever', 'deverá', 'deverão', 'deveria', 'deveriam', 'devia', 'deviam', 'dez', 'dezanove', 'dezasseis', 'dezassete', 'dezoito', 'dia', 'diante', 'disse', 'disso', 'disto', 'dito', 'diz', 'dizem', 'dizer', 'do', 'dois', 'dos', 'doze', 'duas', 'dúvida', 'e', 'é', 'ela', 'elas', 'ele', 'eles', 'em', 'embora', 'enquanto', 'entre', 'era', 'eram', 'éramos', 'és', 'essa', 'essas', 'esse', 'esses', 'esta', 'está', 'estamos', 'estão', 'estar', 'estas', 'estás', 'estava', 'estavam', 'estávamos', 'este', 'esteja', 'estejam', 'estejamos', 'estes', 'esteve', 'estive', 'estivemos', 'estiver', 'estivera', 'estiveram', 'estivéramos', 'estiverem', 'estivermos', 'estivesse', 'estivessem', 'estivéssemos', 'estiveste', 'estivestes', 'estou', 'etc', 'eu', 'exemplo', 'faço', 'falta', 'favor', 'faz', 'fazeis', 'fazem', 'fazemos', 'fazendo', 'fazer', 'fazes', 'feita', 'feitas', 'feito', 'feitos', 'fez', 'fim', 'final', 'foi', 'fomos', 'for', 'fora', 'foram', 'fôramos', 'forem', 'forma', 'formos', 'fosse', 'fossem', 'fôssemos', 'foste', 'fostes', 'fui', 'geral', 'grande', 'grandes', 'grupo', 'há', 'haja', 'hajam', 'hajamos', 'hão', 'havemos', 'havia', 'hei', 'hoje', 'hora', 'horas', 'houve', 'houvemos', 'houver', 'houvera', 'houverá', 'houveram', 'houvéramos', 'houverão', 'houverei', 'houverem', 'houveremos', 'houveria', 'houveriam', 'houveríamos', 'houvermos', 'houvesse', 'houvessem', 'houvéssemos', 'isso', 'isto', 'já', 'la', 'lá', 'lado', 'lhe', 'lhes', 'lo', 'local', 'logo', 'longe', 'lugar', 'maior', 'maioria', 'mais', 'mal', 'mas', 'máximo', 'me', 'meio', 'menor', 'menos', 'mês', 'meses', 'mesma', 'mesmas', 'mesmo', 'mesmos', 'meu', 'meus', 'mil', 'minha', 'minhas', 'momento', 'muita', 'muitas', 'muito', 'muitos', 'na', 'nada', 'não', 'naquela', 'naquelas', 'naquele', 'naqueles', 'nas', 'nem', 'nenhum', 'nenhuma', 'nessa', 'nessas', 'nesse', 'nesses', 'nesta', 'nestas', 'neste', 'nestes', 'ninguém', 'nível', 'no', 'noite', 'nome', 'nos', 'nós', 'nossa', 'nossas', 'nosso', 'nossos', 'nova', 'novas', 'nove', 'novo', 'novos', 'num', 'numa', 'número', 'nunca', 'o', 'obra', 'obrigada', 'obrigado', 'oitava', 'oitavo', 'oito', 'onde', 'ontem', 'onze', 'os', 'ou', 'outra', 'outras', 'outro', 'outros', 'para', 'parece', 'parte', 'partir', 'paucas', 'pela', 'pelas', 'pelo', 'pelos', 'pequena', 'pequenas', 'pequeno', 'pequenos', 'per', 'perante', 'perto', 'pode', 'pude', 'pôde', 'podem', 'podendo', 'poder', 'poderia', 'poderiam', 'podia', 'podiam', 'põe', 'põem', 'pois', 'ponto', 'pontos', 'por', 'porém', 'porque', 'porquê', 'posição', 'possível', 'possivelmente', 'posso', 'pouca', 'poucas', 'pouco', 'poucos', 'primeira', 'primeiras', 'primeiro', 'primeiros', 'própria', 'próprias', 'próprio', 'próprios', 'próxima', 'próximas', 'próximo', 'próximos', 'pude', 'puderam', 'quais', 'quáis', 'qual', 'quando', 'quanto', 'quantos', 'quarta', 'quarto', 'quatro', 'que', 'quê', 'quem', 'quer', 'quereis', 'querem', 'queremas', 'queres', 'quero', 'questão', 'quinta', 'quinto', 'quinze', 'relação', 'sabe', 'sabem', 'são', 'se', 'segunda', 'segundo', 'sei', 'seis', 'seja', 'sejam', 'sejamos', 'sem', 'sempre', 'sendo', 'ser', 'será', 'serão', 'serei', 'seremos', 'seria', 'seriam', 'seríamos', 'sete', 'sétima', 'sétimo', 'seu', 'seus', 'sexta', 'sexto', 'si', 'sido', 'sim', 'sistema', 'só', 'sob', 'sobre', 'sois', 'somos', 'sou', 'sua', 'suas', 'tal', 'talvez', 'também', 'tampouco', 'tanta', 'tantas', 'tanto', 'tão', 'tarde', 'te', 'tem', 'tém', 'têm', 'temos', 'tendes', 'tendo', 'tenha', 'tenham', 'tenhamos', 'tenho', 'tens', 'ter', 'terá', 'terão', 'terceira', 'terceiro', 'terei', 'teremos', 'teria', 'teriam', 'teríamos', 'teu', 'teus', 'teve', 'ti', 'tido', 'tinha', 'tinham', 'tínhamos', 'tive', 'tivemos', 'tiver', 'tivera', 'tiveram', 'tivéramos', 'tiverem', 'tivermos', 'tivesse', 'tivessem', 'tivéssemos', 'tiveste', 'tivestes', 'toda', 'todas', 'todavia', 'todo', 'todos', 'trabalho', 'três', 'treze', 'tu', 'tua', 'tuas', 'tudo', 'última', 'últimas', 'último', 'últimos', 'um', 'uma', 'umas', 'uns', 'vai', 'vais', 'vão', 'vários', 'vem', 'vêm', 'vendo', 'vens', 'ver', 'vez', 'vezes', 'viagem', 'vindo', 'vinte', 'vir', 'você', 'vocês', 'vos', 'vós', 'vossa', 'vossas', 'vosso', 'vossos', 'zero', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '_' ]
 def startFiltragem(efarsas,data1,data2,Texto):
+
+    #count = count + 1
+
     textos_filtrados_total = []
     # if len(sys.argv)==2:
     #     dado_FatoFake = definir_periodo(dado_FatoFake, converter_data(sys.argv[1]),date.today())
@@ -106,5 +125,12 @@ def startFiltragem(efarsas,data1,data2,Texto):
         gera_grafico(dado_Efarsas,Texto)
         textos_filtrados_total = filtragemTexto(dado_FatoFake,"fato_fake_filtrado.csv")
         contagemPalavras(textos_filtrados_total,"fato_fake_repeticoes.csv")
-        
 
+
+#describe test
+    print('----------------------')
+    efarsas_dataframe = pd.read_csv("efarsas_repeticoes.csv")
+    print(efarsas_dataframe.describe(include='all'))
+    efarsas_dataframe.describe(include='all').to_csv("describe_test.csv")
+    print('----------------------')
+    print(efarsas_dataframe)
