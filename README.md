@@ -55,5 +55,14 @@ Atenção! Salvem os dados nesta ordem:
 - [ ] visualização de dados  
 - [ ] talvez fazer um arquivo em bash que roda tudo?
 - [ ] implementar um novo sistema de indice que mostra meses/anos
-- [ ] fzer o describe funcionar ou fazer uma funcao na mao que mostre todas os atributos pedidos pela professora
+- [x] fazer uma funcao na mao que mostre todas os atributos pedidos pela professora
+      - [x]adicionar mediana
+      - [/]adicionar moda
+      - [x]adicionar variancia
+      - [x]adicionar cv
+      - [x]adicionar amplitude
+      - [x]adicionar intervalo interquartil
+- [ ] SUGESTAO: quando salvar o resumo_estatistico.csv, pedir para o usuario salvar-lo em algum lugar
+
 - [ ] implementar relatorio de analise de dados
+- [ ] implementar um novo csv de instancias da palavra chave e a data(semana ou mes) em que elas aconteceram p/ criar grafico
