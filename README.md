@@ -57,12 +57,12 @@ Atenção! Salvem os dados nesta ordem:
 - [ ] implementar um novo sistema de indice que mostra meses/anos
 - [x] fazer uma funcao na mao que mostre todas os atributos pedidos pela professora
 - [x]adicionar mediana
-- [/]adicionar moda
+- [x]adicionar moda
 - [x]adicionar variancia
 - [x]adicionar cv
 - [x]adicionar amplitude
 - [x]adicionar intervalo interquartil 
 - [ ] SUGESTAO: quando salvar o resumo_estatistico.csv, pedir para o usuario salvar-lo em algum lugar
 
-- [ ] implementar relatorio de analise de dados
-- [ ] implementar um novo csv de instancias da palavra chave e a data(semana ou mes) em que elas aconteceram p/ criar grafico
+- [x] implementar relatorio de analise de dados
+- [x] implementar um novo csv de instancias da palavra chave e a data(semana ou mes) em que elas aconteceram p/ criar grafico
