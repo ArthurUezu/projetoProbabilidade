@@ -140,8 +140,11 @@ def resumo_amostral(dataframe,path_csv):
     amplitude = maior - menor
     iq = (q3/4) - (q1/4)
     # -------
-    
-    data = {'estatisticas':['amostras', 'media', 'mediana', 'moda', 'desvio', 'variancia', 'cv', 'minimo', 'q1', 'q2', 'q3', 'maximo', 'iq', 'amplitude'], 'resultados':[num, media, mediana, dataframe['semana'].iloc[modaMaior], desvio, variancia, cv, menor, q1, q2, q3, maior, iq, amplitude]}
+    try:
+        data = {'estatisticas':['amostras', 'media', 'mediana', 'moda', 'desvio', 'variancia', 'cv', 'minimo', 'q1', 'q2', 'q3', 'maximo', 'iq', 'amplitude'], 'resultados':[num, media, mediana, dataframe['semana'].iloc[modaMaior], desvio, variancia, cv, menor, q1, q2, q3, maior, iq, amplitude]}
+    except:
+        data = {'estatisticas':['amostras', 'media', 'mediana', 'moda', 'desvio', 'variancia', 'cv', 'minimo', 'q1', 'q2', 'q3', 'maximo', 'iq', 'amplitude'], 'resultados':[num, media, mediana, dataframe['repeticoes'].iloc[0], desvio, variancia, cv, menor, q1, q2, q3, maior, iq, amplitude]}
+
     df = pd.DataFrame(data)
 
     df.to_csv(path_csv,index=False) #seria legal abrir um menu de "salvar em"
