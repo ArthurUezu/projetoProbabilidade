@@ -1,0 +1,7 @@
+QTextEdit{
+    background-color: #ff0000;
+}
+
+Qlabel{
+    background-color: #ff0000;
+}

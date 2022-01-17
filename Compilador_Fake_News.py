@@ -7,6 +7,7 @@ import fato_fake
 import threading
 from datetime import datetime
 import time
+import os
 
 global_flag = False
 
@@ -14,6 +15,7 @@ class Ui_Widget(object):
     def setupUi(self, Widget):
         Widget.setObjectName("Widget")
         Widget.resize(451, 343)
+        Widget.setStyleSheet("background-color: #241E42;")
 
         self.verticalLayout = QtWidgets.QVBoxLayout(Widget)
         self.verticalLayout.setContentsMargins(11, 11, 11, 11)
@@ -21,11 +23,11 @@ class Ui_Widget(object):
         self.verticalLayout.setObjectName("verticalLayout")
         self.Texto = QtWidgets.QLabel(Widget)
         
-        font = QtGui.QFont()
+        font = QtGui.QFont("Poppins", 20, QtGui.QFont.Bold)
         font.setPointSize(26)
-
+        
         self.Texto.setFont(font)
-        self.Texto.setStyleSheet("color:rgb(74, 74, 74);")
+        self.Texto.setStyleSheet("color:#8D51E0; drop-shadow: 2px 2px red;" )
         self.Texto.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.Texto.setObjectName("Texto")
         self.verticalLayout.addWidget(self.Texto, 0, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
@@ -33,8 +35,10 @@ class Ui_Widget(object):
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
 
+        font.setPointSize(10)
         self.RbFarsas = QtWidgets.QRadioButton(Widget)
-        self.RbFarsas.setStyleSheet("color:rgb(74, 74, 74);")
+        self.RbFarsas.setFont(font)
+        self.RbFarsas.setStyleSheet( "QRadioButton::indicator:uncheked { Background-color:#D0D3F5; border-radius:6px; }" "QRadioButton::indicator:checked { Background-color:#8D51E0; border-radius:6px;}" "QRadioButton{ color:#8D51E0 }" )
         self.RbFarsas.setChecked(True)
         self.RbFarsas.setObjectName("RbFarsas")
 
@@ -45,7 +49,8 @@ class Ui_Widget(object):
         self.horizontalLayout.addWidget(self.RbFarsas, 0, QtCore.Qt.AlignHCenter)
 
         self.RbG1 = QtWidgets.QRadioButton(Widget)
-        self.RbG1.setStyleSheet("color:rgb(74, 74, 74);")
+        self.RbG1.setFont(font)
+        self.RbG1.setStyleSheet("QRadioButton::indicator:uncheked { Background-color:#D0D3F5; border-radius:6px; }" "QRadioButton::indicator:checked { Background-color:#8D51E0; border-radius:6px;}" "QRadioButton{ color:#8D51E0 }")
         self.RbG1.setObjectName("RbG1")
         self.buttonGroup.addButton(self.RbG1,2)
         self.horizontalLayout.addWidget(self.RbG1, 0, QtCore.Qt.AlignHCenter)
@@ -53,7 +58,8 @@ class Ui_Widget(object):
         self.verticalLayout.addLayout(self.horizontalLayout)
 
         self.Tag = QtWidgets.QLineEdit(Widget)
-        self.Tag.setStyleSheet("background-color:rgb(248,248,248);\n" "border-color: rgb(136, 136, 136);")
+        self.Tag.setFont(font)
+        self.Tag.setStyleSheet("background-color:#352D52;\n" "border-color: #D0AEF5;" "color:#8D51E0;""border-radius:4px;")
         self.Tag.setObjectName("Tag")
         self.verticalLayout.addWidget(self.Tag)
 
@@ -62,30 +68,40 @@ class Ui_Widget(object):
 
         self.de = QtWidgets.QLabel(Widget)
         self.de.setObjectName("de")
+        self.de.setFont(font)
+        self.de.setStyleSheet("color:#8D51E0;")
         self.deate.addWidget(self.de)
 
         self.ate = QtWidgets.QLabel(Widget)
         self.ate.setObjectName("ate")
+        self.ate.setFont(font)
+        self.ate.setStyleSheet("color:#8D51E0;")
         self.deate.addWidget(self.ate)
         self.verticalLayout.addLayout(self.deate)
 
         self.datas = QtWidgets.QHBoxLayout()
         self.datas.setObjectName("datas")
         self.data1 = QtWidgets.QDateEdit(Widget)
+        self.data1.setFont(font)
+        self.data1.setStyleSheet("background-color:#352D52;\n" "border-color: #D0AEF5;""color:#8D51E0;""border-radius:4px;")
         self.data1.setObjectName("data1")
         self.datas.addWidget(self.data1)
         self.data2 = QtWidgets.QDateEdit(Widget)
+        self.data2.setFont(font)
+        self.data2.setStyleSheet("background-color:#352D52;\n" "border-color: #D0AEF5;" "color:#8D51E0;""border-radius:4px;")
         self.data2.setObjectName("data2")
         self.datas.addWidget(self.data2)
         self.verticalLayout.addLayout(self.datas)
 
         self.Bpesquisa = QtWidgets.QPushButton(Widget)
-        self.Bpesquisa.setStyleSheet("color: rgb(64, 65, 66);\n" "border-color: rgb(136, 136, 136);")
+        self.Bpesquisa.setFont(font)
+        self.Bpesquisa.setStyleSheet("color: #8D51E0 ;\n" "border-color: #D0AEF5;" "border-radius: 4px;""background-color:#352D52;")
         self.Bpesquisa.setObjectName("Bpesquisa")
         self.verticalLayout.addWidget(self.Bpesquisa)
 
         self.Edtexto = QtWidgets.QTextEdit(Widget)
-        self.Edtexto.setStyleSheet("background-color:rgb(248,248,248);\n" "border-color: rgb(136, 136, 136);")
+        self.Edtexto.setFont(font)
+        self.Edtexto.setStyleSheet("background-color:#352D52;\n" "border-color: #D0AEF5;" "color:#8D51E0;")
         self.Edtexto.setReadOnly(True)
         self.Edtexto.setObjectName("Edtexto")
         self.verticalLayout.addWidget(self.Edtexto)
@@ -151,8 +167,9 @@ class Ui_Widget(object):
 
     def retranslateUi(self, Widget):
         _translate = QtCore.QCoreApplication.translate
-        Widget.setWindowTitle(_translate("Widget", "Compilador de Fake News"))
-        self.Texto.setText(_translate("Widget", "Compilador de Fake News"))
+        Widget.setWindowTitle(_translate("Widget", "Fake? Compiler "))
+        Widget.setWindowOpacity(0.99)
+        self.Texto.setText(_translate("Widget", "Fake? Compiler"))
         self.RbFarsas.setText(_translate("Widget", "E-Farsas"))
         self.RbG1.setText(_translate("Widget", "G1 Fato ou Fake"))
         self.de.setText(_translate("Widget", "De"))
