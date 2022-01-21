@@ -1,3 +1,4 @@
+from PyQt5 import sip
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QTableWidgetItem, QTableWidget, QWidget,QMessageBox
 import pandas as pd
@@ -8,8 +9,6 @@ import threading
 from datetime import datetime
 import time
 import os
-
-global_flag = False
 
 class Ui_Widget(object):
     def setupUi(self, Widget):
@@ -27,7 +26,7 @@ class Ui_Widget(object):
         font.setPointSize(26)
         
         self.Texto.setFont(font)
-        self.Texto.setStyleSheet("color:#8D51E0; drop-shadow: 2px 2px red;" )
+        self.Texto.setStyleSheet("color:#8D51E0; " )
         self.Texto.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.Texto.setObjectName("Texto")
         self.verticalLayout.addWidget(self.Texto, 0, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
@@ -181,11 +180,10 @@ class AnotherWindow(QWidget):
         super().__init__()
         layout = QtWidgets.QVBoxLayout()
         self.tableWidget = QtWidgets.QTableWidget()
+        self.setWindowTitle("Resumo Amostral")
         layout.addWidget(self.tableWidget)
-        if (global_flag):
-            file_name = "efarsas_filtrado.csv"
-        else:
-            file_name = "fato_fake_filtrado.csv"
+        self.resize(250,480)
+        file_name = "resumo_amostral.csv"
 
         self.setLayout(layout)
         self.LoadCSVData(file_name)
@@ -211,7 +209,9 @@ class AnotherWindow(QWidget):
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
+    app.setWindowIcon(QtGui.QIcon('icon.png'))
     Widget = QtWidgets.QWidget()
+    Widget.setWindowIcon(QtGui.QIcon('icon.png'))
     ui = Ui_Widget()
     ui.setupUi(Widget)
     Widget.show()
