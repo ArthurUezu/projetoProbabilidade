@@ -20,7 +20,17 @@ sudo pacman -Sy && sudo pacman -S libxcb-image0 libxcb-keysyms1 libxcb-render-ut
 ```
 - Ou instale com seu gerenciador de pacotes preferido.
 
-- No termnial, digite py Compilador_Fake_News.py(Windows) ou python3 Compilador_Fake_News.py(Linux) 
+- No terminal(com a pasta do projeto aberta), digite:
+
+ Windows
+ ```
+ py Compilador_Fake_News.py
+ ```
+ 
+ Linux
+ ```
+ python3 Compilador_Fake_News.py
+ ```
 
 ### Sites usados:  
 - https://www.e-farsas.com/  
