@@ -66,6 +66,7 @@ def gera_grafico(dataframe,palavra):
 
     #estilo do grafico
     plt.style.use('fivethirtyeight')
+    plt.xticks(fontsize = 8, rotation=90)
 
     #var para setar primeira e ultima data
     first_date = weeks[0]
