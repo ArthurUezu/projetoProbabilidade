@@ -47,8 +47,7 @@ sudo pacman -Sy && sudo pacman -S libxcb-image0 libxcb-keysyms1 libxcb-render-ut
 - requests  
 - pandas  
 - matplot ou scilab  
-- beautiful soup  
-- NLTK  
+- beautiful soup    
 
 ### Features para o usuario:
 - escolher palavras chave
